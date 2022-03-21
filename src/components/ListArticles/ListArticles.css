@@ -1,0 +1,38 @@
+.ListArticles {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    margin: 0 0 18px 0;
+}
+
+.articles_list {
+    align-self: center;
+    width: 941px;
+
+    margin-top: 26px;
+}
+
+.article__item {
+    margin-bottom: 16px;
+
+    width: 941px;
+    height: 140px;
+
+    background-color: #FFFFFF;
+    border-radius: 5px;
+
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.07);
+}

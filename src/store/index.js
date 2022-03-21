@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import filterReducer from './filtersSlice';
-import ticketsReducer from './ticketsSlice';
-import tabsReducer from './tabsSlice';
+import userSlice from './userSlice';
+import articlesSlice from './articlesSlice';
 
 export default configureStore({
   reducer: {
-    filters: filterReducer,
-    tickets: ticketsReducer,
-    tabs: tabsReducer,
+    user: userSlice,
+    articles: articlesSlice,
   },
 });

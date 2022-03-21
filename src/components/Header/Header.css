@@ -1,0 +1,67 @@
+.Header {
+    background-color: #FFFFFF;
+    height: 80px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header__title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.85);
+
+    margin-left: 22px;
+    flex-grow: 5;
+
+    text-decoration: none;
+}
+
+.link_sign_in {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.85);
+
+    text-decoration: none;
+}
+
+.link_sign_up {
+    text-decoration: none;
+}
+
+.btn_sign_up {
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: #52C41A;
+    background-color: #FFFFFF;
+
+    text-decoration: none;
+
+    padding: 8px 18px;
+
+    margin-left: 30px;
+    margin-right: 22px;
+}
+
+.btn_sign_up:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,113 @@
+.SignUp {
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    width: 384px;
+    /*height: 599px;*/
+
+    background-color: #FFFFFF;
+
+    align-self: center;
+
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 0 22px 106px rgba(0, 0, 0, 0.07), 0 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198), 0 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0 2.75474px 13.2728px rgba(0, 0, 0, 0.035), 0 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+    border-radius: 6px;
+
+    padding: 48px 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sign_up__title {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+
+    text-align: center;
+
+    color: #262626;
+    margin-bottom: 9px;
+}
+
+.sign_up__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: 100%;
+}
+
+.form__item {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.form__input {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.ant-form-vertical .ant-form-item-label {
+    padding: 0 0 2px;
+}
+
+.ant-form-item {
+    margin-bottom: 0;
+}
+
+.ant-checkbox-wrapper {
+    margin-top: 29px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    color: #595959;
+}
+
+.submit {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-button {
+    background: #1890FF;
+    border-radius: 4px;
+    width: 100%;
+    height: 40px;
+
+    margin-top: 21px;
+}
+
+.form__have_account {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+
+    text-align: center;
+
+    color: #8C8C8C;
+
+    margin-top: 8px;
+}
+
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+    display: none;
+}

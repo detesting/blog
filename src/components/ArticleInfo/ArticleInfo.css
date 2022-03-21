@@ -1,0 +1,33 @@
+.ArticleInfo {
+    width: 941px;
+    background-color: #FFFFFF;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    margin-top: 24px;
+    padding: 16px;
+    margin-bottom: 40px;
+}
+
+.article__header {
+    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.article__main {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.75);
+}
