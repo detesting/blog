@@ -5,7 +5,6 @@ import { Button, Form, Input, message } from 'antd';
 
 import { editUser } from '../../store/userSlice';
 import './EditProfile.css';
-import '../SignUp/SignUp.css';
 
 function EditProfile() {
   const dispatch = useDispatch();

@@ -38,11 +38,25 @@ export const editUser = createAsyncThunk(
   'user/editUser',
   async function editUserInfo({ user, url }, { rejectWithValue }) {
     const token = localStorage.getItem('token');
-    console.log('before');
     let { data, request } = await axios.put(`${url}user`, user, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log('after');
+    let { statusText } = request;
+    if (statusText !== 'OK') {
+      rejectWithValue();
+    }
+    return data;
+  }
+);
+
+export const createArticle = createAsyncThunk(
+  'user/createArticle',
+  async function createNewArticle({ article, url }, { rejectWithValue }) {
+    const token = localStorage.getItem('token');
+    const { data, request } = await axios.post(`${url}articles`, article, {
+      headers: { Authorization: `Token ${token}` },
+    });
+    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();
@@ -133,6 +147,19 @@ const userSlice = createSlice({
       state.error = true;
 
       state.isLogin = false;
+    },
+
+    [createArticle.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    [createArticle.fulfilled]: (state) => {
+      state.loading = false;
+      state.error = false;
+    },
+    [createArticle.rejected]: (state) => {
+      state.loading = false;
+      state.error = true;
     },
   },
 });
