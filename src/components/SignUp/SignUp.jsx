@@ -1,20 +1,38 @@
 import React from 'react';
-import { Form, Input, Checkbox, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { Form, Input, Checkbox, Button, message } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { createUser } from '../../store/userSlice';
 import './SignUp.css';
 
 function SignUp() {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const url = useSelector((state) => state.articles.url);
+
+  const navigate = useNavigate();
+
+  const create = ({ email, username, password }) => {
+    const user = {
+      user: {
+        username,
+        email,
+        password,
+      },
+    };
+    dispatch(createUser({ user, url })).then(({ meta }) => {
+      if (meta.requestStatus === 'rejected') {
+        message.error('Username or email already taken', 15);
+      } else {
+        navigate('/');
+      }
+    });
+  };
   return (
     <div className="SignUp">
       <div className="sign_up__title">Create new account</div>
-      <Form
-        form={form}
-        name="register_form"
-        onFinish={() => console.log('пора отправить данные')}
-        layout="vertical"
-        className="sign_up__form"
-      >
+      <Form form={form} name="register_form" onFinish={create} layout="vertical" className="sign_up__form">
         <Form.Item
           label="Username"
           name="username"
@@ -25,7 +43,7 @@ function SignUp() {
         </Form.Item>
         <Form.Item
           label="Email address"
-          name="email-address"
+          name="email"
           className="form__item"
           rules={[
             {

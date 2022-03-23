@@ -62,6 +62,58 @@
     margin-right: 22px;
 }
 
-.btn_sign_up:hover{
+.btn_sign_up:hover,
+.btn_create:hover,
+.btn_log_out:hover {
     cursor: pointer;
+}
+
+.btn_create {
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    color: #52C41A;
+
+    padding: 6px 10px;
+
+    margin-right: 26px;
+    background-color: #FFFFFF;
+}
+
+.link_user {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.btn_log_out {
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.75);
+
+    padding: 10px 18px;
+
+    background-color: #FFFFFF;
+
+    margin-left: 27px;
+    margin-right: 22px;
 }
