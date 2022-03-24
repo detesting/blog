@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserInfo, loginOut } from '../../store/userSlice';
@@ -19,7 +19,14 @@ function Header() {
 
   const userInfo = useSelector((state) => state.user.userInfo);
   const defaultImg = 'https://static.productionready.io/images/smiley-cyrus.jpg';
+  const navigate = useNavigate();
   console.log(userInfo);
+
+  const logOut = () => {
+    dispatch(loginOut()).then(() => {
+      navigate('/');
+    });
+  };
 
   return (
     <div className="Header">
@@ -41,7 +48,7 @@ function Header() {
               className="article__user_logo"
             />
           </Link>
-          <Link to="/" className="link_log_out" onClick={() => dispatch(loginOut())}>
+          <Link to="/" className="link_log_out" onClick={logOut}>
             <button className="btn_log_out">Log out</button>
           </Link>
         </div>
