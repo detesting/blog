@@ -34,7 +34,7 @@ function EditProfile() {
 
   return localStorage.getItem('isLogin') ? (
     <div className="SignUp">
-      <div className="sign_up__title">Create new account</div>
+      <div className="sign_up__title">Edit Profile</div>
       <Form form={form} name="register_form" onFinish={edit} layout="vertical" className="sign_up__form">
         <Form.Item
           label="Username"
