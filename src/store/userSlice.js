@@ -97,6 +97,44 @@ export const deleteArticle = createAsyncThunk(
   }
 );
 
+export const addFavorite = createAsyncThunk(
+  'user/addFavorite',
+  async function addUserFavorite({ url, slug }, { rejectWithValue }) {
+    const token = localStorage.getItem('token');
+    console.log(`Token ${token}`);
+    const { data, request } = await axios.post(
+      `${url}articles/${slug}/favorite`,
+      {},
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
+    console.log(data);
+    let { statusText } = request;
+    if (statusText !== 'OK') {
+      rejectWithValue();
+    }
+    return data;
+  }
+);
+
+export const deleteFavorite = createAsyncThunk(
+  'user/deleteFavorite',
+  async function deleteUserFavorite({ url, slug }, { rejectWithValue }) {
+    const token = localStorage.getItem('token');
+    console.log(`Token ${token}`);
+    const { data, request } = await axios.delete(`${url}articles/${slug}/favorite`, {
+      headers: { Authorization: `Token ${token}` },
+    });
+    console.log(data);
+    let { statusText } = request;
+    if (statusText !== 'OK') {
+      rejectWithValue();
+    }
+    return data;
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {

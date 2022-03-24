@@ -4,14 +4,20 @@ import axios from 'axios';
 export const getArticles = createAsyncThunk(
   'articles/getArticles',
   async function getArticlesAll({ limit, offset, url }) {
-    let { data } = await axios.get(`${url}articles?limit=${limit}&offset=${offset}`);
+    const token = localStorage.getItem('token');
+    let { data } = await axios.get(`${url}articles?limit=${limit}&offset=${offset}`, {
+      headers: { Authorization: `Token ${token}` },
+    });
     console.log(data);
     return data;
   }
 );
 
 export const getArticle = createAsyncThunk('articles/getArticle', async function getArticlesAll({ url, slug }) {
-  let { data } = await axios.get(`${url}articles/${slug}`);
+  const token = localStorage.getItem('token');
+  let { data } = await axios.get(`${url}articles/${slug}`, {
+    headers: { Authorization: `Token ${token}` },
+  });
   console.log(data, 'slice ');
   return data;
 });

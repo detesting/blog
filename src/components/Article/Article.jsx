@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import format from 'date-fns/format';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-//HeartFilled
-import { HeartOutlined } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { Button, Popconfirm, Tag, message } from 'antd';
 
-import { deleteArticle } from '../../store/userSlice';
+import { deleteArticle, deleteFavorite, addFavorite } from '../../store/userSlice';
 import './Article.css';
 
 function Article({ article }) {
-  const { author, updatedAt, favoritesCount, tagList, title, description, slug } = article;
+  const { author, updatedAt, favoritesCount, tagList, title, description, slug, favorited } = article;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const dispatch = useDispatch();
   const url = useSelector((state) => state.articles.url);
+
+  const [countFavorites, setCountFavorites] = useState(favoritesCount);
+  const [favorites, setFavorites] = useState(favorited);
 
   const onDelete = () => {
     if (userInfo.username === article.author.username) {
@@ -40,6 +42,40 @@ function Article({ article }) {
     }
   };
 
+  const onFavorite = () => {
+    // const { article } = dispatch(addFavorite({ url, slug }));
+    //
+    // const { favoritesCount, favorited } = article;
+    // setCountFavorites(favoritesCount);
+    // setFavorites(favorited);
+
+    dispatch(addFavorite({ url, slug })).then(({ meta, payload }) => {
+      if (meta.requestStatus === 'rejected') {
+        message.error('Error favorite', 5);
+      } else {
+        const { article } = payload;
+        console.log(article);
+        const { favoritesCount, favorited } = article;
+        setCountFavorites(favoritesCount);
+        setFavorites(favorited);
+      }
+    });
+  };
+
+  const onFavoriteDelete = () => {
+    dispatch(deleteFavorite({ url, slug })).then(({ meta, payload }) => {
+      if (meta.requestStatus === 'rejected') {
+        message.error('Error delete favorite', 5);
+      } else {
+        const { article } = payload;
+        console.log(article);
+        const { favoritesCount, favorited } = article;
+        setCountFavorites(favoritesCount);
+        setFavorites(favorited);
+      }
+    });
+  };
+
   let { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -53,8 +89,13 @@ function Article({ article }) {
                 <Link to={`/articles/${slug}`}>{title}</Link>
               </div>
               <div className="article__likes">
-                <HeartOutlined onClick={() => console.log('click Like')} className="likes" />
-                <div className="likes__count">{favoritesCount}</div>
+                {favorites ? (
+                  <HeartFilled className="likes" onClick={onFavoriteDelete} style={{ color: 'red' }} />
+                ) : (
+                  <HeartOutlined onClick={onFavorite} className="likes" />
+                )}
+                {/*<HeartOutlined onClick={() => console.log('click Like')} className="likes" />*/}
+                <div className="likes__count">{countFavorites}</div>
               </div>
             </div>
             <div className="article__tags">
