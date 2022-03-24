@@ -31,7 +31,7 @@ const articlesSlice = createSlice({
   },
   reducers: {
     changePage(state, action) {
-      state.offset = state.limit * action.payload.page;
+      state.offset = state.limit * (action.payload.page - 1);
       state.page = action.payload.page;
     },
     clearArticle(state) {
