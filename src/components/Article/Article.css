@@ -117,4 +117,46 @@
     margin-top: 5px;
 
     color: rgba(0, 0, 0, 0.5);
+
+    flex-grow: 5;
+}
+
+.article__delete {
+    border: 1px solid #F5222D;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    color: #F5222D;
+}
+
+.article__edit {
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    color: #52C41A;
+
+    margin-left: 12px;
+}
+
+.article__desc_btns {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-top: 15px;
+    align-items: center;
 }

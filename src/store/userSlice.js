@@ -65,6 +65,38 @@ export const createArticle = createAsyncThunk(
   }
 );
 
+export const updateArticle = createAsyncThunk(
+  'user/updateArticle',
+  async function updateUserArticle({ article, url, slug }, { rejectWithValue }) {
+    const token = localStorage.getItem('token');
+    const { data, request } = await axios.put(`${url}articles/${slug}`, article, {
+      headers: { Authorization: `Token ${token}` },
+    });
+    console.log(data);
+    let { statusText } = request;
+    if (statusText !== 'OK') {
+      rejectWithValue();
+    }
+    return data;
+  }
+);
+
+export const deleteArticle = createAsyncThunk(
+  'user/deleteArticle',
+  async function deleteUserArticle({ url, slug }, { rejectWithValue }) {
+    const token = localStorage.getItem('token');
+    const { data, request } = await axios.delete(`${url}articles/${slug}`, {
+      headers: { Authorization: `Token ${token}` },
+    });
+    console.log(data);
+    let { statusText } = request;
+    if (statusText !== 'OK') {
+      rejectWithValue();
+    }
+    return data;
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -105,7 +137,6 @@ const userSlice = createSlice({
 
       state.isLogin = true;
       localStorage.setItem('isLogin', 'true');
-      // localStorage.setItem('userInfo', JSON.stringify(action.payload.user));
     },
     [loginUser.rejected]: (state) => {
       state.loading = false;
@@ -147,19 +178,6 @@ const userSlice = createSlice({
       state.error = true;
 
       state.isLogin = false;
-    },
-
-    [createArticle.pending]: (state) => {
-      state.loading = true;
-      state.error = false;
-    },
-    [createArticle.fulfilled]: (state) => {
-      state.loading = false;
-      state.error = false;
-    },
-    [createArticle.rejected]: (state) => {
-      state.loading = false;
-      state.error = true;
     },
   },
 });

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './ArticleForm.css';
-import { createArticle } from '../../store/userSlice';
+import { createArticle, updateArticle } from '../../store/userSlice';
+
+// import { getArticle } from '../../store/articlesSlice';
 
 function ArticleForm() {
   const [form] = Form.useForm();
@@ -15,6 +17,26 @@ function ArticleForm() {
 
   let { pathname } = useLocation();
 
+  // let slug;
+  // if (pathname !== '/new-article') {
+  //   slug = useParams().slug;
+  // }
+
+  // useEffect(() => {
+  //   dispatch(getArticle({ url, slug }));
+  // }, [dispatch, url, slug]);
+
+  let { article } = useSelector((state) => state.articles.article);
+  if (pathname === '/new-article') {
+    article = {};
+  }
+  // useEffect(() => {
+  //   if (pathname !== '/new-article') {
+  //     dispatch(getArticle({ url, slug }));
+  //   }
+  //   return () => dispatch(clearArticle);
+  // }, []);
+  const { slug } = useParams();
   const submitForm = ({ title, description, body, tagList }) => {
     const article = {
       article: {
@@ -27,18 +49,37 @@ function ArticleForm() {
     if (pathname === '/new-article') {
       dispatch(createArticle({ article, url })).then(({ meta }) => {
         if (meta.requestStatus === 'rejected') {
-          message.error('Error create', 15);
+          message.error('Error create', 5);
         } else {
+          message.success('Success create', 5);
+          navigate('/');
+        }
+      });
+    } else {
+      dispatch(updateArticle({ article, url, slug })).then(({ meta }) => {
+        if (meta.requestStatus === 'rejected') {
+          message.error('Error update', 5);
+        } else {
+          message.success('Success update', 5);
           navigate('/');
         }
       });
     }
   };
 
-  return (
+  console.log('article ', article);
+
+  return localStorage.getItem('isLogin') ? (
     <div className="ArticleForm">
       <div className="article_form__title">{pathname === '/new-article' ? 'Create new article' : 'Edit article'}</div>
-      <Form form={form} name="register_form" onFinish={submitForm} layout="vertical" className="sign_up__form">
+      <Form
+        form={form}
+        name="register_form"
+        onFinish={submitForm}
+        layout="vertical"
+        className="sign_up__form"
+        initialValues={{ ...article }}
+      >
         <Form.Item
           label="Title"
           name="title"
@@ -115,6 +156,10 @@ function ArticleForm() {
           </Button>
         </Form.Item>
       </Form>
+    </div>
+  ) : (
+    <div className="hacker">
+      <Link to="/sign-in">Sign In</Link>, please!
     </div>
   );
 }

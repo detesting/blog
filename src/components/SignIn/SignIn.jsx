@@ -23,8 +23,9 @@ function SignIn() {
     };
     dispatch(loginUser({ user, url })).then(({ meta }) => {
       if (meta.requestStatus === 'rejected') {
-        message.error('Invalid data', 15);
+        message.error('Invalid data', 5);
       } else {
+        message.success('Success login', 5);
         navigate('/');
       }
     });

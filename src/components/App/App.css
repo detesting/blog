@@ -12,3 +12,16 @@ body {
     flex-direction: column;
     max-width: 100%;
 }
+
+.hacker {
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+
+    margin-top: 20px;
+}

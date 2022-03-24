@@ -23,8 +23,9 @@ function SignUp() {
     };
     dispatch(createUser({ user, url })).then(({ meta }) => {
       if (meta.requestStatus === 'rejected') {
-        message.error('Username or email already taken', 15);
+        message.error('Username or email already taken', 5);
       } else {
+        message.success('Success create user', 5);
         navigate('/');
       }
     });

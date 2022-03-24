@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form, Input, message } from 'antd';
 
 import { editUser } from '../../store/userSlice';
@@ -25,14 +25,15 @@ function EditProfile() {
     };
     dispatch(editUser({ user, url })).then(({ meta }) => {
       if (meta.requestStatus === 'rejected') {
-        message.error('Error edit. Please, change username or email', 15);
+        message.error('Error edit. Please, change username or email', 5);
       } else {
+        message.success('Success edit', 5);
         navigate('/');
       }
     });
   };
 
-  return (
+  return localStorage.getItem('isLogin') ? (
     <div className="SignUp">
       <div className="sign_up__title">Create new account</div>
       <Form form={form} name="register_form" onFinish={edit} layout="vertical" className="sign_up__form">
@@ -89,6 +90,10 @@ function EditProfile() {
           </Button>
         </Form.Item>
       </Form>
+    </div>
+  ) : (
+    <div className="hacker">
+      <Link to="/sign-in">Sign In</Link>, please!
     </div>
   );
 }
