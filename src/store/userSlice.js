@@ -30,7 +30,6 @@ export const loginUser = createAsyncThunk(
 export const getUserInfo = createAsyncThunk('user/getUserInfo', async function getUser({ url }) {
   const token = localStorage.getItem('token');
   const { data } = await axios.get(`${url}user`, { headers: { Authorization: `Token ${token}` } });
-  console.log(data);
   return data;
 });
 
@@ -56,7 +55,6 @@ export const createArticle = createAsyncThunk(
     const { data, request } = await axios.post(`${url}articles`, article, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();
@@ -72,7 +70,6 @@ export const updateArticle = createAsyncThunk(
     const { data, request } = await axios.put(`${url}articles/${slug}`, article, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();
@@ -88,7 +85,6 @@ export const deleteArticle = createAsyncThunk(
     const { data, request } = await axios.delete(`${url}articles/${slug}`, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();
@@ -101,7 +97,6 @@ export const addFavorite = createAsyncThunk(
   'user/addFavorite',
   async function addUserFavorite({ url, slug }, { rejectWithValue }) {
     const token = localStorage.getItem('token');
-    console.log(`Token ${token}`);
     const { data, request } = await axios.post(
       `${url}articles/${slug}/favorite`,
       {},
@@ -109,7 +104,6 @@ export const addFavorite = createAsyncThunk(
         headers: { Authorization: `Token ${token}` },
       }
     );
-    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();
@@ -122,11 +116,9 @@ export const deleteFavorite = createAsyncThunk(
   'user/deleteFavorite',
   async function deleteUserFavorite({ url, slug }, { rejectWithValue }) {
     const token = localStorage.getItem('token');
-    console.log(`Token ${token}`);
     const { data, request } = await axios.delete(`${url}articles/${slug}/favorite`, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log(data);
     let { statusText } = request;
     if (statusText !== 'OK') {
       rejectWithValue();

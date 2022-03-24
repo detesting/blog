@@ -12,9 +12,11 @@ function ArticleInfo() {
   const dispatch = useDispatch();
   const { slug } = useParams();
   const url = useSelector((state) => state.articles.url);
+
   useEffect(() => {
     dispatch(getArticle({ url, slug }));
   }, [dispatch, url, slug]);
+
   const { article } = useSelector((state) => state.articles.article);
   const loading = useSelector((state) => state.articles.loading);
 

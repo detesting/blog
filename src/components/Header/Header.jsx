@@ -11,8 +11,8 @@ function Header() {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   let { pathname } = useLocation();
-  console.log(pathname);
   const url = useSelector((state) => state.articles.url);
+
   useEffect(() => {
     dispatch(getUserInfo({ url }));
   }, [pathname]);
@@ -20,7 +20,6 @@ function Header() {
   const userInfo = useSelector((state) => state.user.userInfo);
   const defaultImg = 'https://static.productionready.io/images/smiley-cyrus.jpg';
   const navigate = useNavigate();
-  console.log(userInfo);
 
   const logOut = () => {
     dispatch(loginOut()).then(() => {

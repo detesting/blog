@@ -30,6 +30,7 @@ function SignUp() {
       }
     });
   };
+
   return (
     <div className="SignUp">
       <div className="sign_up__title">Create new account</div>

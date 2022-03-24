@@ -8,7 +8,6 @@ export const getArticles = createAsyncThunk(
     let { data } = await axios.get(`${url}articles?limit=${limit}&offset=${offset}`, {
       headers: { Authorization: `Token ${token}` },
     });
-    console.log(data);
     return data;
   }
 );
@@ -18,7 +17,6 @@ export const getArticle = createAsyncThunk('articles/getArticle', async function
   let { data } = await axios.get(`${url}articles/${slug}`, {
     headers: { Authorization: `Token ${token}` },
   });
-  console.log(data, 'slice ');
   return data;
 });
 
@@ -52,7 +50,6 @@ const articlesSlice = createSlice({
     [getArticles.fulfilled]: (state, action) => {
       state.loading = false;
       state.error = false;
-      console.log(action);
       state.articleArr = action.payload.articles;
       state.articlesCount = action.payload.articlesCount;
     },
@@ -67,7 +64,6 @@ const articlesSlice = createSlice({
     [getArticle.fulfilled]: (state, action) => {
       state.loading = false;
       state.error = false;
-      console.log(action);
       state.article = action.payload;
     },
     [getArticle.rejected]: (state) => {

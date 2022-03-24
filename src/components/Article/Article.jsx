@@ -19,6 +19,9 @@ function Article({ article }) {
   const [countFavorites, setCountFavorites] = useState(favoritesCount);
   const [favorites, setFavorites] = useState(favorited);
 
+  let { pathname } = useLocation();
+  const navigate = useNavigate();
+
   const onDelete = () => {
     if (userInfo.username === article.author.username) {
       dispatch(deleteArticle({ url, slug })).then(({ meta }) => {
@@ -43,18 +46,11 @@ function Article({ article }) {
   };
 
   const onFavorite = () => {
-    // const { article } = dispatch(addFavorite({ url, slug }));
-    //
-    // const { favoritesCount, favorited } = article;
-    // setCountFavorites(favoritesCount);
-    // setFavorites(favorited);
-
     dispatch(addFavorite({ url, slug })).then(({ meta, payload }) => {
       if (meta.requestStatus === 'rejected') {
         message.error('Error favorite', 5);
       } else {
         const { article } = payload;
-        console.log(article);
         const { favoritesCount, favorited } = article;
         setCountFavorites(favoritesCount);
         setFavorites(favorited);
@@ -68,16 +64,12 @@ function Article({ article }) {
         message.error('Error delete favorite', 5);
       } else {
         const { article } = payload;
-        console.log(article);
         const { favoritesCount, favorited } = article;
         setCountFavorites(favoritesCount);
         setFavorites(favorited);
       }
     });
   };
-
-  let { pathname } = useLocation();
-  const navigate = useNavigate();
 
   return (
     <div className="Article">
@@ -94,7 +86,6 @@ function Article({ article }) {
                 ) : (
                   <HeartOutlined onClick={onFavorite} className="likes" />
                 )}
-                {/*<HeartOutlined onClick={() => console.log('click Like')} className="likes" />*/}
                 <div className="likes__count">{countFavorites}</div>
               </div>
             </div>

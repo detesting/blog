@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form, Input, message } from 'antd';
 
 import { editUser } from '../../store/userSlice';
-import './EditProfile.css';
 
 function EditProfile() {
   const dispatch = useDispatch();

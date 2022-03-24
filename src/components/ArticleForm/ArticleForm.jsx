@@ -6,37 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import './ArticleForm.css';
 import { createArticle, updateArticle } from '../../store/userSlice';
 
-// import { getArticle } from '../../store/articlesSlice';
-
 function ArticleForm() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const url = useSelector((state) => state.articles.url);
 
-  const navigate = useNavigate();
-
-  let { pathname } = useLocation();
-
-  // let slug;
-  // if (pathname !== '/new-article') {
-  //   slug = useParams().slug;
-  // }
-
-  // useEffect(() => {
-  //   dispatch(getArticle({ url, slug }));
-  // }, [dispatch, url, slug]);
-
+  const { pathname } = useLocation();
+  const { slug } = useParams();
   let { article } = useSelector((state) => state.articles.article);
+
   if (pathname === '/new-article') {
     article = {};
   }
-  // useEffect(() => {
-  //   if (pathname !== '/new-article') {
-  //     dispatch(getArticle({ url, slug }));
-  //   }
-  //   return () => dispatch(clearArticle);
-  // }, []);
-  const { slug } = useParams();
+
   const submitForm = ({ title, description, body, tagList }) => {
     const article = {
       article: {
@@ -66,8 +49,6 @@ function ArticleForm() {
       });
     }
   };
-
-  console.log('article ', article);
 
   return localStorage.getItem('isLogin') ? (
     <div className="ArticleForm">

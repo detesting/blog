@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loginUser } from '../../store/userSlice';
-import './SignIn.css';
-import '../SignUp/SignUp.css';
 
 function SignIn() {
   const [form] = Form.useForm();
@@ -30,6 +28,7 @@ function SignIn() {
       }
     });
   };
+
   return (
     <div className="SignUp">
       <div className="sign_up__title">Sign In</div>
